@@ -9,23 +9,47 @@
 <body>
     <header>
         <h1>
-            <a href="https://github.com/dudushy/dynamic-interface">dynamic-interface</a>
+            <a href="https://github.com/dudushy/dynamic-interface" target="_blank">dynamic-interface</a>
         </h1>
     </header>
     <hr>
 
     <div id="content">
-        <h2>
-            output: <span id="output"></span>
-        </h2>
-
         <table>
             <tr>
                 <td class="input">
-                    <input id="raw_input" type="text" oninput="readInput()">
+                    <button>CLEAR</button>
+                </td>
+            </tr>
+            <tr>
+                <td class="input">
+                    <label for="fruits">Choose a fruit:</label>
+
+                    <select name="fruits" id="fruits" oninput="readSelect()">
+                        <option disabled selected value>--</option>
+                        <option value="banana">banana</option>
+                        <option value="apple">apple</option>
+                        <option value="kiwi">kiwi</option>
+                        <option value="orange">orange</option>
+                    </select>
+                </td>
+                <td class="input">
+                    <label for="amount">Choose a amount:</label>
+                    <input name="amount" id="amount" type="number" max="10" min="0" oninput="readInput()">
                 </td>
             </tr>
         </table>
+
+        <table>
+            <tr><td><span id="output-banana" class="output"></span></td></tr>
+            <tr><td><span id="output-apple" class="output"></span></td></tr>
+            <tr><td><span id="output-kiwi" class="output"></span></td></tr>
+            <tr><td><span id="output-orange" class="output"></span></td></tr>
+        </table>
+
+        <h2>
+            output: <span class="output" id="output"></span>
+        </h2>
     </div>
 
     <hr>
@@ -33,7 +57,7 @@
         <h2>
             Made with <span id="heart">&#10084;</span>
             <br>
-            by <a href="https://github.com/dudushy">dudushy</a>
+            by <a href="https://github.com/dudushy" target="_blank">dudushy</a>
         </h2>
     </footer>
 

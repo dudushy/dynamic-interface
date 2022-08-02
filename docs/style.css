@@ -20,6 +20,19 @@ body {
     font-family: monospace;
 }
 
-#heart {
+div#content {
+    display: inline-block;
+}
+
+span#heart {
     color: var(--danger);
+}
+
+span#output {
+    color: var(--success);
+}
+
+.input {
+    border: 1px solid #fff;
+    padding: 1em;
 }

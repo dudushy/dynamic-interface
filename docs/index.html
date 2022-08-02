@@ -18,15 +18,15 @@
   <div id="content">
     <table>
       <tr>
-        <td class="input">
-          <button>CLEAR</button>
+        <td class="input" id="td-clear">
+          <button id="button-clear" onclick="clearValues()">CLEAR</button>
         </td>
       </tr>
       <tr>
-        <td class="input">
-          <label for="fruits">Choose a fruit:</label>
+        <td class="input" id="td-fruit">
+          <label for="fruit">Choose a fruit:</label>
 
-          <select name="fruits" id="fruits" oninput="readSelect()">
+          <select name="fruit" id="select-fruit" oninput="readFruit()">
             <option disabled selected value>--</option>
             <option value="banana">banana</option>
             <option value="apple">apple</option>
@@ -34,9 +34,11 @@
             <option value="orange">orange</option>
           </select>
         </td>
-        <td class="input">
+      </tr>
+      <tr>
+        <td class="input" id="td-amount">
           <label for="amount">Choose a amount:</label>
-          <input name="amount" id="amount" type="number" max="10" min="0" oninput="readInput()">
+          <input name="amount" id="input-amount" type="number" max="10" min="0" oninput="readAmount()" value="0">
         </td>
       </tr>
     </table>
@@ -57,7 +59,10 @@
     </table>
 
     <h2>
-      output: <span class="output" id="output"></span>
+      output:
+      <span id="output">
+        <span class="output" id="output-fruit">--</span> / <span class="output" id="output-amount">0</span>
+      </span>
     </h2>
   </div>
 

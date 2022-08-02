@@ -20,6 +20,15 @@ body {
   font-family: monospace;
 }
 
+input[type=number]:hover::-webkit-inner-spin-button {
+  width: 14px;
+  height: 30px;
+}
+
+a {
+  color: var(--tertiary);
+}
+
 div#content {
   display: inline-block;
 }
@@ -33,6 +42,44 @@ span#heart {
 }
 
 .input {
-  border: 1px solid #fff;
-  padding: 1em;
+  border: 1px solid var(--primary);
+  padding: .5em;
+  display: none;
+}
+
+#button-clear {
+  height: 100%;
+  width: 100%;
+  padding-top: .5em;
+  padding-bottom: .5em;
+
+  font-size: x-large;
+  color: var(--text);
+  background-color: var(--danger);
+}
+
+#td-clear {
+  display: block;
+}
+
+#td-fruit {
+  display: block;
+}
+
+#select-fruit {
+  padding: .5em;
+
+  font-size: small;
+  font-weight: bold;
+  color: var(--wall);
+  background-color: var(--warning);
+}
+
+#input-amount {
+  padding: .5em;
+
+  font-size: small;
+  font-weight: bold;
+  color: var(--wall);
+  background-color: var(--success);
 }

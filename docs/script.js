@@ -11,6 +11,28 @@ var fruits = {
   orange: "0"
 };
 
+var storage = {};
+
+console.log("[dynamic-interface] loadData(fruits)");
+loadData(fruits);
+
+function loadData(dataArray) {
+  console.log("[loadData] dataArray:", dataArray);
+  console.log("[loadData] dataArray.length:", dataArray.length);
+  for (let item in dataArray) {
+    const fruit = item;
+    const amount = dataArray[item];
+    console.log(`[loadData] fruit: '${fruit}' / amount: '${amount}'`);
+
+    //? <option value="banana">banana</option>
+    const selectFruit = document.getElementById("select-fruit");
+    const option = document.createElement("option");
+    option.innerText = fruit;
+    option.value = fruit;
+    selectFruit.appendChild(option);
+  }
+}
+
 function readFruit() {
   const selectFruit = document.getElementById("select-fruit");
   // console.log("[readFruit] selectFruit:", selectFruit);
@@ -81,14 +103,14 @@ function clearValues() {
   tdSave.style.display = "none";
 }
 
-function saveValues() {
-  console.log("[saveValues] save (fruit, amount)");
-
+function saveValues(dataArray) {
   const fruit = document.getElementById("select-fruit").value;
   const amount = document.getElementById("input-amount").value;
   console.log(`[saveValues] fruit: '${fruit}' / amount: '${amount}'`);
 
-  console.log("[saveValues] (BEFORE) fruits", fruits);
-  fruits[fruit] = amount;
-  console.log("[saveValues] (AFTER) fruits", fruits);
+  console.log("[saveValues] (BEFORE) dataArray", dataArray);
+  dataArray[fruit] = amount;
+  console.log("[saveValues] (AFTER) dataArray", dataArray);
+
+  console.log("[saveValues] storage", storage);
 }

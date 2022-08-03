@@ -28,10 +28,10 @@
 
           <select name="fruit" id="select-fruit" oninput="readFruit()">
             <option disabled selected value>--</option>
-            <option value="banana">banana</option>
+            <!-- <option value="banana">banana</option>
             <option value="apple">apple</option>
             <option value="kiwi">kiwi</option>
-            <option value="orange">orange</option>
+            <option value="orange">orange</option> -->
           </select>
         </td>
       </tr>
@@ -43,7 +43,7 @@
       </tr>
       <tr>
         <td class="input" id="td-save">
-          <button id="button-save" onclick="saveValues()">SAVE</button>
+          <button id="button-save" onclick="saveValues(storage)">SAVE</button>
         </td>
       </tr>
     </table>

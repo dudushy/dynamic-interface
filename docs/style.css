@@ -52,10 +52,43 @@ span#heart {
   width: 100%;
   padding-top: .5em;
   padding-bottom: .5em;
+  opacity: .8;
 
   font-size: x-large;
+  font-weight: bold;
+  font-family: monospace;
   color: var(--text);
   background-color: var(--danger);
+}
+#button-clear:hover {
+  opacity: 1;
+}
+#button-clear:active {
+  opacity: 1;
+  color: var(--danger);
+  background-color: var(--text);
+}
+
+#button-save {
+  height: 100%;
+  width: 100%;
+  padding-top: .5em;
+  padding-bottom: .5em;
+  opacity: .8;
+
+  font-size: x-large;
+  font-weight: bold;
+  font-family: monospace;
+  color: var(--wall);
+  background-color: var(--success);
+}
+#button-save:hover {
+  opacity: 1;
+}
+#button-save:active {
+  opacity: 1;
+  color: var(--success);
+  background-color: var(--wall);
 }
 
 #td-clear {

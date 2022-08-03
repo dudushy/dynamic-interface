@@ -82,7 +82,7 @@ function clearValues() {
 }
 
 function saveValues() {
-  console.log("[saveValues] save (fruit, amount");
+  console.log("[saveValues] save (fruit, amount)");
 
   const fruit = document.getElementById("select-fruit").value;
   const amount = document.getElementById("input-amount").value;

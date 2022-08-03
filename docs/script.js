@@ -76,13 +76,15 @@ function readAmount() {
 function clearValues() {
   console.log("[clearValues] clear (fruits, fruit, amount, save)");
 
+  storage = {};
+  console.log("[clearValues] storage", storage);
+
   fruits = {
     banana: "0",
     apple: "0",
     kiwi: "0",
     orange: "0"
   };
-
   console.log("[clearValues] fruits", fruits);
 
   const selectFruit = document.getElementById("select-fruit");
@@ -90,6 +92,7 @@ function clearValues() {
 
   selectFruit.value = "";
   outputFruit.textContent = "--";
+  console.log("[clearValues] fruit");
 
   const tdAmount = document.getElementById("td-amount");
   const inputAmount = document.getElementById("input-amount");
@@ -98,9 +101,11 @@ function clearValues() {
   tdAmount.style.display = "none";
   inputAmount.value = "0";
   outputAmount.textContent = "0";
+  console.log("[clearValues] amount");
 
   const tdSave = document.getElementById("td-save");
   tdSave.style.display = "none";
+  console.log("[clearValues] save");
 }
 
 function saveValues(dataArray) {

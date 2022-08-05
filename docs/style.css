@@ -116,3 +116,53 @@ span#heart {
   color: var(--wall);
   background-color: var(--success);
 }
+
+#table-output {
+  border: 1px solid var(--primary);
+  padding: .5em;
+
+  width: 100%;
+  text-align: center;
+}
+
+.tr-item {
+  color: var(--wall);
+  font-weight: bolder;
+  font-size: large;
+  /* height: 100%; */
+}
+.color-A {
+  background-color: var(--secondary);
+}
+.color-B {
+  background-color: var(--primary);
+  color: var(--text);
+}
+
+.button-remove {
+  background-color: var(--danger);
+  height: 100%;
+  width: 50%;
+  opacity: .9;
+}
+.button-remove:hover {
+  opacity: 1;
+}
+.button-remove:active {
+  opacity: 1;
+  background-color: var(--text);
+}
+
+.button-edit {
+  background-color: var(--medium);
+  height: 100%;
+  width: 50%;
+  opacity: .9;
+}
+.button-edit:hover {
+  opacity: 1;
+}
+.button-edit:active {
+  opacity: 1;
+  background-color: var(--text);
+}

@@ -5,16 +5,18 @@ function test() {
 }
 
 var fruits = {
-  banana: "0",
+  banana: "1",
   apple: "0",
-  kiwi: "0",
-  orange: "0"
+  kiwi: "2",
+  orange: "5"
 };
 
 var storage = {};
 
-console.log("[dynamic-interface] loadData(fruits)");
+// console.log("[dynamic-interface] loadData(fruits)");
 loadData(fruits);
+
+// displayItems(fruits);
 
 function loadData(dataArray) {
   console.log("[loadData] dataArray:", dataArray);
@@ -118,4 +120,69 @@ function saveValues(dataArray) {
   console.log("[saveValues] (AFTER) dataArray", dataArray);
 
   console.log("[saveValues] storage", storage);
+
+  displayItems(dataArray);
+}
+
+function displayItems(dataArray) {
+  console.log("[displayItems] dataArray", dataArray);
+
+  const table = document.getElementById("table-output");
+
+  let AorB = true;
+
+  //? Clear table childs
+  while (table.firstChild) {
+    table.removeChild(table.firstChild);
+  }
+
+  for (const [fruit, amount] of Object.entries(dataArray)) {
+    console.log(`[displayItems] fruit: ${fruit} | amount: ${amount}`);
+    console.log(`[displayItems] AorB: ${AorB}`);
+
+    const tr = document.createElement("tr");
+    const tdFruit = document.createElement("td");
+    const tdAmount = document.createElement("td");
+    const tdOptions = document.createElement("td");
+    const spanFruit = document.createElement("span");
+    const spanAmount = document.createElement("span");
+    const buttonRemove = document.createElement("button");
+    const buttonEdit = document.createElement("button");
+    const imgRemove = document.createElement("img");
+    const imgEdit = document.createElement("img");
+
+    if (amount != 0) {
+      //? tdFruit
+      spanFruit.innerText = fruit;
+      tdFruit.appendChild(spanFruit);
+
+      //? tdAmount
+      spanAmount.innerText = amount;
+      tdAmount.appendChild(spanAmount);
+
+      //? tdOptions
+      imgEdit.src = "imgs/create-outline.svg";
+      imgEdit.classList.add("img-edit");
+      buttonEdit.appendChild(imgEdit);
+      buttonEdit.classList.add("button-edit");
+      tdOptions.appendChild(buttonEdit);
+
+      imgRemove.src = "imgs/trash-outline.svg";
+      imgRemove.classList.add("img-remove");
+      buttonRemove.appendChild(imgRemove);
+      buttonRemove.classList.add("button-remove");
+      tdOptions.appendChild(buttonRemove);
+
+      //? tr
+      tr.appendChild(tdFruit);
+      tr.appendChild(tdAmount);
+      tr.appendChild(tdOptions);
+      tr.classList.add("tr-item");
+      tr.classList.add(`color-${(AorB) ? "A" : "B"}`);
+      table.appendChild(tr);
+
+      //? toggle colors
+      AorB = !AorB;
+    }
+  }
 }

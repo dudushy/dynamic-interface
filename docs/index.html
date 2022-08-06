@@ -38,14 +38,15 @@
       <tr>
         <td class="input" id="td-amount">
           <label for="amount">Choose a amount:</label>
-          <input autocomplete="off" name="amount" id="input-amount" type="number" max="10" min="0" oninput="readAmount()" value="0">
+          <!-- <input autocomplete="off" name="amount" id="input-amount" type="number" max="10" min="0" oninput="readAmount()" value="0"> -->
+          <input autocomplete="off" name="amount" id="input-amount" type="number" max="10" min="0" oninput="saveValues(storage)" value="0">
         </td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td class="input" id="td-save">
           <button id="button-save" onclick="saveValues(storage)">SAVE</button>
         </td>
-      </tr>
+      </tr> -->
     </table>
 
     <table id="table-output">

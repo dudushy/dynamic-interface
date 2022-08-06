@@ -4,26 +4,39 @@ function test() {
   console.log("test");
 }
 
-var fruits = {
-  banana: "1",
-  apple: "0",
-  kiwi: "2",
-  orange: "5"
-};
+var fruitArray = [
+  {
+    fruit: "banana",
+    amount: 1
+  },
+  {
+    fruit: "apple",
+    amount: 0
+  },
+  {
+    fruit: "kiwi",
+    amount: 2
+  },
+  {
+    fruit: "orange",
+    amount: 5
+  }
+];
+console.log("fruitArray", fruitArray);
 
-var storage = {};
+var storage = fruitArray;
 
 // console.log("[dynamic-interface] loadData(fruits)");
-loadData(fruits);
+loadData(storage);
 
 // displayItems(fruits);
 
 function loadData(dataArray) {
   console.log("[loadData] dataArray:", dataArray);
   console.log("[loadData] dataArray.length:", dataArray.length);
-  for (let item in dataArray) {
-    const fruit = item;
-    const amount = dataArray[item];
+  for (const item of dataArray) {
+    const fruit = item.fruit;
+    const amount = item.amount;
     console.log(`[loadData] fruit: '${fruit}' / amount: '${amount}'`);
 
     //? <option value="banana">banana</option>
@@ -33,6 +46,8 @@ function loadData(dataArray) {
     option.value = fruit;
     selectFruit.appendChild(option);
   }
+
+  displayItems(dataArray);
 }
 
 function readFruit() {
@@ -52,42 +67,30 @@ function readAmount() {
   // console.log("[readAmount] inputAmount:", inputAmount);
   console.log("[readAmount] inputAmount.value:", inputAmount.value);
 
-  const tdSave = document.getElementById("td-save");
+  // const tdSave = document.getElementById("td-save");
 
   if (inputAmount.value != "") {
     console.log("[readAmount] update output-amount");
     document.getElementById("output-amount").textContent = inputAmount.value;
 
-    console.log("[readAmount] show tdSave"); //!
-    tdSave.style.display = "block"; //!
-    // if (parseInt(inputAmount.value) != 0) {
-    //!   console.log("[readAmount] show tdSave");
-    //!   tdSave.style.display = "block";
-    // } else {
-    //   console.log("[readAmount] hide tdSave");
-    //   tdSave.style.display = "none";
-    // }
+    // console.log("[readAmount] show tdSave");
+    // tdSave.style.display = "block";
   } else {
     console.log("[readAmount] hide tdSave && reset output");
     inputAmount.value = "0";
     document.getElementById("output-amount").textContent = "0";
-    tdSave.style.display = "none";
+    // tdSave.style.display = "none";
   }
 }
 
 function clearValues() {
-  console.log("[clearValues] clear (fruits, fruit, amount, save)");
+  console.log("[clearValues] clear (storage, fruit, amount, save)");
 
-  storage = {};
+  for (const item of storage) {
+    item.amount = 0;
+  }
+  // storage = {};
   console.log("[clearValues] storage", storage);
-
-  fruits = {
-    banana: "0",
-    apple: "0",
-    kiwi: "0",
-    orange: "0"
-  };
-  console.log("[clearValues] fruits", fruits);
 
   const selectFruit = document.getElementById("select-fruit");
   const outputFruit = document.getElementById("output-fruit");
@@ -105,18 +108,32 @@ function clearValues() {
   outputAmount.textContent = "0";
   console.log("[clearValues] amount");
 
-  const tdSave = document.getElementById("td-save");
-  tdSave.style.display = "none";
-  console.log("[clearValues] save");
+  // const tdSave = document.getElementById("td-save");
+  // tdSave.style.display = "none";
+  // console.log("[clearValues] save");
+
+  displayItems(storage);
 }
 
 function saveValues(dataArray) {
+  readAmount();
   const fruit = document.getElementById("select-fruit").value;
   const amount = document.getElementById("input-amount").value;
   console.log(`[saveValues] fruit: '${fruit}' / amount: '${amount}'`);
 
   console.log("[saveValues] (BEFORE) dataArray", dataArray);
-  dataArray[fruit] = amount;
+  if (Object.keys(dataArray).length != 0) {
+    for (const item of dataArray) {
+      if (item.fruit == fruit) {
+        item.amount = amount;
+      }
+    }
+  } else {
+    dataArray = {
+      fruit: fruit,
+      amount: amount
+    };
+  }
   console.log("[saveValues] (AFTER) dataArray", dataArray);
 
   console.log("[saveValues] storage", storage);
@@ -126,6 +143,7 @@ function saveValues(dataArray) {
 
 function displayItems(dataArray) {
   console.log("[displayItems] dataArray", dataArray);
+  console.log("[displayItems] Object.keys(dataArray).length", Object.keys(dataArray).length);
 
   const table = document.getElementById("table-output");
 
@@ -136,53 +154,60 @@ function displayItems(dataArray) {
     table.removeChild(table.firstChild);
   }
 
-  for (const [fruit, amount] of Object.entries(dataArray)) {
-    console.log(`[displayItems] fruit: ${fruit} | amount: ${amount}`);
-    console.log(`[displayItems] AorB: ${AorB}`);
+  if (Object.keys(dataArray).length != 0) {
+    table.style.display = "table";
 
-    const tr = document.createElement("tr");
-    const tdFruit = document.createElement("td");
-    const tdAmount = document.createElement("td");
-    const tdOptions = document.createElement("td");
-    const spanFruit = document.createElement("span");
-    const spanAmount = document.createElement("span");
-    const buttonRemove = document.createElement("button");
-    const buttonEdit = document.createElement("button");
-    const imgRemove = document.createElement("img");
-    const imgEdit = document.createElement("img");
+    for (const item of dataArray) {
+      console.log(`[displayItems] fruit: ${item.fruit} | amount: ${item.amount}`);
+      console.log(`[displayItems] AorB: ${AorB}`);
 
-    if (amount != 0) {
-      //? tdFruit
-      spanFruit.innerText = fruit;
-      tdFruit.appendChild(spanFruit);
+      const tr = document.createElement("tr");
+      const tdFruit = document.createElement("td");
+      const tdAmount = document.createElement("td");
+      const tdOptions = document.createElement("td");
+      const spanFruit = document.createElement("span");
+      const spanAmount = document.createElement("span");
+      const buttonRemove = document.createElement("button");
+      const buttonEdit = document.createElement("button");
+      const imgRemove = document.createElement("img");
+      const imgEdit = document.createElement("img");
 
-      //? tdAmount
-      spanAmount.innerText = amount;
-      tdAmount.appendChild(spanAmount);
+      if (item.amount != 0) {
+        //? tdFruit
+        spanFruit.innerText = item.fruit;
+        tdFruit.appendChild(spanFruit);
 
-      //? tdOptions
-      imgEdit.src = "imgs/create-outline.svg";
-      imgEdit.classList.add("img-edit");
-      buttonEdit.appendChild(imgEdit);
-      buttonEdit.classList.add("button-edit");
-      tdOptions.appendChild(buttonEdit);
+        //? tdAmount
+        spanAmount.innerText = item.amount;
+        tdAmount.appendChild(spanAmount);
 
-      imgRemove.src = "imgs/trash-outline.svg";
-      imgRemove.classList.add("img-remove");
-      buttonRemove.appendChild(imgRemove);
-      buttonRemove.classList.add("button-remove");
-      tdOptions.appendChild(buttonRemove);
+        //? tdOptions
+        imgEdit.src = "imgs/create-outline.svg";
+        imgEdit.classList.add("img-edit");
+        buttonEdit.appendChild(imgEdit);
+        buttonEdit.classList.add("button-edit");
+        tdOptions.appendChild(buttonEdit);
 
-      //? tr
-      tr.appendChild(tdFruit);
-      tr.appendChild(tdAmount);
-      tr.appendChild(tdOptions);
-      tr.classList.add("tr-item");
-      tr.classList.add(`color-${(AorB) ? "A" : "B"}`);
-      table.appendChild(tr);
+        imgRemove.src = "imgs/trash-outline.svg";
+        imgRemove.classList.add("img-remove");
+        buttonRemove.appendChild(imgRemove);
+        buttonRemove.classList.add("button-remove");
+        tdOptions.appendChild(buttonRemove);
 
-      //? toggle colors
-      AorB = !AorB;
+        //? tr
+        tr.appendChild(tdFruit);
+        tr.appendChild(tdAmount);
+        tr.appendChild(tdOptions);
+        tr.classList.add("tr-item");
+        tr.classList.add(`color-${(AorB) ? "A" : "B"}`);
+        table.appendChild(tr);
+
+        //? toggle colors
+        AorB = !AorB;
+      }
     }
+  }
+  else {
+    table.style.display = "none";
   }
 }
